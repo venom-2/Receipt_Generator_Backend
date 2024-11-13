@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:5173/" )
+@CrossOrigin(origins = "https://receipt-generatorfrontend.vercel.app/" )
 public class UserController {
     @Autowired
     UserService userService;
