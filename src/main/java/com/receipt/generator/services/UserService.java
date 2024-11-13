@@ -38,11 +38,42 @@ public class UserService {
 }
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 class LoginResponse {
     private int status;
     private String msg;
     private String authToken;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public LoginResponse(int status, String authToken, String msg) {
+        this.status = status;
+        this.authToken = authToken;
+        this.msg = msg;
+    }
+
+    public LoginResponse() {
+    }
 }
 
