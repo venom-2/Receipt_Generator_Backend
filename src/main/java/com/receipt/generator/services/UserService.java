@@ -2,6 +2,7 @@ package com.receipt.generator.services;
 
 import com.receipt.generator.dao.UserDAO;
 import com.receipt.generator.dto.UserRequest;
+import com.receipt.generator.entities.Response;
 import com.receipt.generator.entities.User;
 import com.receipt.generator.utilities.JwtUtility;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class UserService {
 
     public ResponseEntity<?> saveUser(User user){
         String msg = userDAO.saveUser(user);
-        return ResponseEntity.ok(msg);
+        return ResponseEntity.ok(new Response(HttpStatus.ACCEPTED.value(), msg));
     }
 
     public ResponseEntity<?> login(UserRequest userRequest) {
@@ -37,11 +38,42 @@ public class UserService {
 }
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 class LoginResponse {
     private int status;
     private String msg;
     private String authToken;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public LoginResponse(int status, String authToken, String msg) {
+        this.status = status;
+        this.authToken = authToken;
+        this.msg = msg;
+    }
+
+    public LoginResponse() {
+    }
 }
 
