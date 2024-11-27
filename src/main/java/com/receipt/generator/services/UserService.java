@@ -7,6 +7,7 @@ import com.receipt.generator.entities.User;
 import com.receipt.generator.utilities.JwtUtility;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,24 +44,12 @@ class LoginResponse {
     private String msg;
     private String authToken;
 
-    public int getStatus() {
-        return status;
-    }
-
     public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getAuthToken() {
-        return authToken;
-    }
-
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
-    }
-
-    public String getMsg() {
-        return msg;
     }
 
     public void setMsg(String msg) {
