@@ -21,8 +21,8 @@ public class ReceiptService {
         return ResponseEntity.ok(res);
     }
 
-    public ResponseEntity<?> fetchReceipt(String userId) {
-        List<Receipt> receiptList = receiptDAO.fetchReceipt(userId);
+    public ResponseEntity<?> fetchReceipt(String userEmail) {
+        List<Receipt> receiptList = receiptDAO.fetchReceipt(userEmail);
         return ResponseEntity.ok(receiptList);
     }
 
