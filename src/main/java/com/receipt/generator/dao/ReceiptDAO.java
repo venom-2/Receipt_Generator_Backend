@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ReceiptDAO {
 
@@ -22,5 +24,20 @@ public class ReceiptDAO {
         } catch (Exception ex) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed to save Receipt!");
         }
+    }
+
+    public List<Receipt> fetchReceipt(String userId) {
+        return receiptRepository.findAllByUser(userId);
+    }
+
+    public Response deleteReceipt(String billNumber) {
+        if(!receiptRepository.existsByBillNumber(billNumber))
+            return new Response(HttpStatus.NO_CONTENT.value(), "No record found!");
+        receiptRepository.deleteByBillNumber(billNumber);
+        return new Response(HttpStatus.ACCEPTED.value(), "Deleted Receipt with bill number "+ billNumber);
+    }
+
+    public List<Receipt> fetchCustomerReceipt(String customerPhone) {
+        return receiptRepository.findAllByCustomerPhone(customerPhone);
     }
 }

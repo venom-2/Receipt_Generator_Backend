@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReceiptService {
 
@@ -17,5 +19,20 @@ public class ReceiptService {
     public ResponseEntity<?> saveReceipt(Receipt receipt) {
         Response res  = receiptDAO.saveReceipt(receipt);
         return ResponseEntity.ok(res);
+    }
+
+    public ResponseEntity<?> fetchReceipt(String userId) {
+        List<Receipt> receiptList = receiptDAO.fetchReceipt(userId);
+        return ResponseEntity.ok(receiptList);
+    }
+
+    public ResponseEntity<?> deleteReceipt(String billNumber) {
+        Response res = receiptDAO.deleteReceipt(billNumber);
+        return ResponseEntity.ok(res);
+    }
+
+    public ResponseEntity<?> fetchCustomerReceipt(String customerPhone) {
+        List<Receipt> receiptList = receiptDAO.fetchCustomerReceipt(customerPhone);
+        return ResponseEntity.ok(receiptList);
     }
 }
