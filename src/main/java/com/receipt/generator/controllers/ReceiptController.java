@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/receipt")
-@CrossOrigin(origins = "https://receipt-generatorfrontend.vercel.app/" )
+@CrossOrigin(origins = "*" )
 public class ReceiptController {
 
     @Autowired

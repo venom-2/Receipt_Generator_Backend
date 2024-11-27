@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/test")
-@CrossOrigin(origins = "https://receipt-generatorfrontend.vercel.app/" )
+@CrossOrigin(origins = "*" )
 public class TestController {
     @GetMapping("/")
     public ResponseEntity<?> getMsg() {
