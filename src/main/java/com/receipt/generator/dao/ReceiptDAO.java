@@ -26,8 +26,8 @@ public class ReceiptDAO {
         }
     }
 
-    public List<Receipt> fetchReceipt(String userId) {
-        return receiptRepository.findAllByUser(userId);
+    public List<Receipt> fetchReceipt(String userEmail) {
+        return receiptRepository.findAllByUser(userEmail);
     }
 
     public Response deleteReceipt(String billNumber) {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/receipt")
+@CrossOrigin(origins = "https://receipt-generatorfrontend.vercel.app/" )
 public class ReceiptController {
 
     @Autowired
@@ -18,9 +19,9 @@ public class ReceiptController {
         return receiptService.saveReceipt(receipt);
     }
 
-    @GetMapping("/fetch/{userId}")
-    public ResponseEntity<?> fetchReceipt(@PathVariable String userId) {
-        return receiptService.fetchReceipt(userId);
+    @GetMapping("/fetch/{userEmail}")
+    public ResponseEntity<?> fetchReceipt(@PathVariable String userEmail) {
+        return receiptService.fetchReceipt(userEmail);
     }
 
     @GetMapping("/fetch/customer/receipts/{customerPhone}")
