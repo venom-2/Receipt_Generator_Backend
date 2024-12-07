@@ -39,4 +39,11 @@ public class Receipt {
 
     // Items
     private List<JewellerItems> items;
+
+    // Total and due
+    private String closingBalance;
+    private String previousDue;
+    private String currentDue;
+    private String paidAmount;
+    private String totalNetWeight;
 }

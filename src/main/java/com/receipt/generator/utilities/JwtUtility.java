@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtility {
 
-    private final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);;
+    private final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,6 +45,8 @@ public class JwtUtility {
     }
 
     private String createToken(Map<String, Object> claims, String email) {
+        String secretKeyBase64 = Base64.getEncoder().encodeToString(SECRET_KEY.getEncoded());
+        System.out.println("Secret Key (Base64): " + secretKeyBase64);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(email)
