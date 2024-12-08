@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -56,9 +57,26 @@ public class JwtUtility {
                 .compact();
     }
 
-    public Boolean validateToken(String token, String email) {
-        final String extractedEmail = extractEmail(token);
-        return (extractedEmail.equals(email) && !isTokenExpired(token));
+    public Claims validateToken(String token) throws Exception {
+        try {
+            // Parse the token and validate the signature with the SECRET_KEY
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            // Check if the token is expired
+            if (isTokenExpired(token)) {
+                throw new Exception("Token has expired");
+            }
+
+            return claims;  // Return the Claims if valid
+        } catch (SignatureException e) {
+            throw new Exception("Invalid token signature. The token may have been tampered with.");
+        } catch (Exception e) {
+            throw new Exception("Token validation failed: " + e.getMessage());
+        }
     }
 }
 
