@@ -1,6 +1,7 @@
 package com.receipt.generator.services;
 
 import com.receipt.generator.dao.UserDAO;
+import com.receipt.generator.dto.LoginResponse;
 import com.receipt.generator.dto.UserRequest;
 import com.receipt.generator.entities.Response;
 import com.receipt.generator.entities.User;
@@ -31,38 +32,15 @@ public class UserService {
         Boolean success = userDAO.login(userRequest);
         if(success) {
             String authToken = jwtUtility.generateToken(userRequest.getEmail());
-           return  ResponseEntity.ok(new LoginResponse(HttpStatus.ACCEPTED.value(), "Login successful",authToken));
+            return ResponseEntity.ok()
+                    .body(new LoginResponse(HttpStatus.ACCEPTED.value(), authToken, "Login successful"));
+
         } else {
-            return ResponseEntity.badRequest().body(new LoginResponse(HttpStatus.FAILED_DEPENDENCY.value(), "Failed to login!", ""));
+            return ResponseEntity.badRequest()
+                    .body(new LoginResponse(HttpStatus.FAILED_DEPENDENCY.value(), "", "Failed to login!"));
         }
     }
 }
 
-@Data
-class LoginResponse {
-    private int status;
-    private String msg;
-    private String authToken;
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public LoginResponse(int status, String authToken, String msg) {
-        this.status = status;
-        this.authToken = authToken;
-        this.msg = msg;
-    }
-
-    public LoginResponse() {
-    }
-}
 
