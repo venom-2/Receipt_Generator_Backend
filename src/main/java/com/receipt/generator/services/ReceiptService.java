@@ -26,13 +26,13 @@ public class ReceiptService {
         return ResponseEntity.ok(receiptList);
     }
 
-    public ResponseEntity<?> deleteReceipt(String billNumber) {
-        Response res = receiptDAO.deleteReceipt(billNumber);
+    public ResponseEntity<?> deleteReceipt(String billNumber, String email) {
+        Response res = receiptDAO.deleteReceipt(billNumber, email);
         return ResponseEntity.ok(res);
     }
 
-    public ResponseEntity<?> fetchCustomerReceipt(String customerPhone) {
-        List<Receipt> receiptList = receiptDAO.fetchCustomerReceipt(customerPhone);
+    public ResponseEntity<?> fetchCustomerReceipt(String customerPhone, String email) {
+        List<Receipt> receiptList = receiptDAO.fetchCustomerReceipt(customerPhone, email);
         return ResponseEntity.ok(receiptList);
     }
 }

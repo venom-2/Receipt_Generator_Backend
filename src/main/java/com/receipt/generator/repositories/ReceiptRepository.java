@@ -10,7 +10,7 @@ public interface ReceiptRepository extends MongoRepository<Receipt, String> {
 
     List<Receipt> findAllByUser(String userId);
 
-    void deleteByBillNumber(String billNumber);
+    void deleteByBillNumberAndUser(String billNumber, String email);
 
-    List<Receipt> findAllByCustomerPhone(String customerPhone);
+    boolean existsByBillNumberAndUser(String billNumber, String user);
 }
