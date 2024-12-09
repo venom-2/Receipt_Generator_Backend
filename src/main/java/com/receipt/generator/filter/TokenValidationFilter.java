@@ -30,6 +30,17 @@ public class TokenValidationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        httpResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        httpResponse.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+
+        // Allow OPTIONS requests to pass through without validation
+        if ("OPTIONS".equalsIgnoreCase(httpRequest.getMethod())) {
+            httpResponse.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
         String authHeader = httpRequest.getHeader("Authorization");
 
         if (authHeader == null || authHeader.isEmpty()) {

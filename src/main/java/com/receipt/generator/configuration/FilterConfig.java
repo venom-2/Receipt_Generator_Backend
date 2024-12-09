@@ -4,6 +4,7 @@ import com.receipt.generator.filter.TokenValidationFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 
 @Configuration
 public class FilterConfig {
@@ -20,6 +21,7 @@ public class FilterConfig {
         FilterRegistrationBean<TokenValidationFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(tokenValidationFilter); // Use the Spring-managed filter bean
         registrationBean.addUrlPatterns("/api/receipt/*");
+        registrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);
         return registrationBean;
     }
 }
