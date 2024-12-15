@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "users")
 public class User {
+    private String _id;
     private String name;
     private String companyName;
     private String email;
@@ -15,6 +16,14 @@ public class User {
     private String country;
     private String state;
     private String password;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getName() {
         return name;
@@ -72,14 +81,15 @@ public class User {
         this.password = password;
     }
 
-    public User(String name, String password, String state, String country, String mobileNumber, String email, String companyName) {
+    public User(String _id, String name, String companyName, String email, String mobileNumber, String country, String state, String password) {
+        this._id = _id;
         this.name = name;
-        this.password = password;
-        this.state = state;
-        this.country = country;
-        this.mobileNumber = mobileNumber;
-        this.email = email;
         this.companyName = companyName;
+        this.email = email;
+        this.mobileNumber = mobileNumber;
+        this.country = country;
+        this.state = state;
+        this.password = password;
     }
 
     public User() {
