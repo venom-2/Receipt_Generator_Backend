@@ -1,5 +1,6 @@
 package com.receipt.generator.services;
 
+import com.receipt.generator.configuration.SecurityConfig;
 import com.receipt.generator.dao.UserDAO;
 import com.receipt.generator.dto.LoginResponse;
 import com.receipt.generator.dto.UserRequest;
@@ -23,14 +24,19 @@ public class UserService {
     @Autowired
     JwtUtility jwtUtility;
 
-    public ResponseEntity<?> saveUser(User user){
+    @Autowired
+    SecurityConfig securityConfig;
+
+    public ResponseEntity<?> saveUser(User user) throws Exception {
+        String hashedPassword = securityConfig.passwordEncoder().encode(user.getPassword());
+        user.setPassword(hashedPassword);
         String msg = userDAO.saveUser(user);
         return ResponseEntity.ok(new Response(HttpStatus.ACCEPTED.value(), msg));
     }
 
-    public ResponseEntity<?> login(UserRequest userRequest) {
-        Boolean success = userDAO.login(userRequest);
-        if(success) {
+    public ResponseEntity<?> login(UserRequest userRequest) throws Exception{
+        User user = userDAO.login(userRequest);
+        if(securityConfig.passwordEncoder().matches(userRequest.getPassword(), user.getPassword())) {
             String authToken = jwtUtility.generateToken(userRequest.getEmail());
             return ResponseEntity.ok()
                     .body(new LoginResponse(HttpStatus.ACCEPTED.value(), authToken, "Login successful"));

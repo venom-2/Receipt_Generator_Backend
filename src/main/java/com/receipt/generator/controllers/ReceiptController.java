@@ -21,12 +21,12 @@ public class ReceiptController {
     JwtUtility jwtUtility;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveReceipt(@RequestBody Receipt receipt) {
+    public ResponseEntity<?> saveReceipt(@RequestBody Receipt receipt) throws Exception {
         return receiptService.saveReceipt(receipt);
     }
 
     @GetMapping("/fetch/{userEmail}")
-    public ResponseEntity<?> fetchReceipt(@PathVariable String userEmail) {
+    public ResponseEntity<?> fetchReceipt(@PathVariable String userEmail) throws Exception {
         return receiptService.fetchReceipt(userEmail);
     }
 

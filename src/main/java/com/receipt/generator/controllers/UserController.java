@@ -15,12 +15,12 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> saveUser(@RequestBody User user) {
+    public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
         return userService.saveUser(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<?> login(@RequestBody UserRequest userRequest) throws Exception {
         return userService.login(userRequest);
     }
 }

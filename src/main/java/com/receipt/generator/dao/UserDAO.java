@@ -2,6 +2,7 @@ package com.receipt.generator.dao;
 
 import com.receipt.generator.dto.UserRequest;
 import com.receipt.generator.entities.User;
+import com.receipt.generator.exceptions.DuplicateResource;
 import com.receipt.generator.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,10 +12,10 @@ public class UserDAO {
     @Autowired
     UserRepository userRepository;
 
-    public String saveUser(User user) {
+    public String saveUser(User user) throws DuplicateResource {
         User existingUser = userRepository.findByEmail(user.getEmail());
         if(existingUser != null) {
-            return "User already exist with this email!";
+            throw new DuplicateResource("User already exists with this email id!");
         }
         try{
             userRepository.save(user);
@@ -24,8 +25,8 @@ public class UserDAO {
         }
     }
 
-    public Boolean login(UserRequest userRequest) {
+    public User login(UserRequest userRequest) {
         User user = userRepository.findByEmail(userRequest.getEmail());
-        return user != null;
+        return user;
     }
 }
