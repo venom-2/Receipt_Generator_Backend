@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping("/fetch")
     public ResponseEntity<?> getUser() throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // This assumes 'username' is the email
+        String email = authentication.getName();
 
         // Fetch user details using the email
         User user = userService.getUser(email);
