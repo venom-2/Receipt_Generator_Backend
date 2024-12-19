@@ -3,7 +3,6 @@ package com.receipt.generator.dao;
 import com.receipt.generator.configuration.SecurityConfig;
 import com.receipt.generator.dto.LoginRequest;
 import com.receipt.generator.dto.UpdatePasswordRequest;
-import com.receipt.generator.dto.UserRequest;
 import com.receipt.generator.entities.Response;
 import com.receipt.generator.entities.User;
 import com.receipt.generator.exceptions.DuplicateResource;
@@ -12,8 +11,6 @@ import com.receipt.generator.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 public class UserDAO {

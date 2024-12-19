@@ -1,11 +1,8 @@
-package com.receipt.generator.entities;
+package com.receipt.generator.dto;
 
 import com.receipt.generator.enums.ProductType;
-import lombok.Data;
 
-@Data
-public class Product {
-    private String _id;
+public class ProductRequest {
     private String user;
     private String itemName;
     private String gWt;
@@ -15,11 +12,10 @@ public class Product {
     private ProductType type;
     private Integer quantity;
 
-    public Product() {
+    public ProductRequest() {
     }
 
-    public Product(String _id, String user, String itemName, String gWt, String lWt, String nWt, String tunch, ProductType type, Integer quantity) {
-        this._id = _id;
+    public ProductRequest(String user, String itemName, String gWt, String lWt, String nWt, String tunch, ProductType type, Integer quantity) {
         this.user = user;
         this.itemName = itemName;
         this.gWt = gWt;
@@ -28,14 +24,6 @@ public class Product {
         this.tunch = tunch;
         this.type = type;
         this.quantity = quantity;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
     }
 
     public String getUser() {

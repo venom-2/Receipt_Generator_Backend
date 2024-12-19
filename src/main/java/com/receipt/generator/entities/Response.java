@@ -1,8 +1,6 @@
 package com.receipt.generator.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class Response {

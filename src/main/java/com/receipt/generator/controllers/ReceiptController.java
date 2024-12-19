@@ -5,7 +5,6 @@ import com.receipt.generator.services.ReceiptService;
 import com.receipt.generator.utilities.JwtUtility;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
