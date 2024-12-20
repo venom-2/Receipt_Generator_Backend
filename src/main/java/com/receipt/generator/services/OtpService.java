@@ -39,19 +39,38 @@ public class OtpService {
     }
 
     // Send OTP via email
-    public void sendOtpEmail(String email, String otp) throws MessagingException, MessagingException {
-        String subject = "Your OTP Code";
+    public void sendOtpEmail(String email, String otp) throws MessagingException {
+        String subject = "Your OTP Code for Receipt Generator";
+
+        // HTML email body with responsive, clean, and professional design
         String body = "<html>"
-                + "<body style='font-family: Arial, sans-serif; color: #333;'>"
-                + "<h2 style='color: #2d87f0;'>Your OTP Code</h2>"
-                + "<p>Dear User,</p>"
-                + "<p>Thank you for registering with us! Your OTP code is:</p>"
-                + "<h1 style='color: #f44336; font-size: 40px;'>" + otp + "</h1>"
-                + "<p style='font-size: 16px;'>This code will expire in 5 minutes.</p>"
-                + "<p>If you did not request this OTP, please ignore this message.</p>"
-                + "<br>"
-                + "<p>Best regards,</p>"
-                + "<p><b>XceeDesigns</b></p>"
+                + "<body style='font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0; background-color: #f4f4f4;'>"
+                + "<div style='display: flex; justify-content: center; align-items: center; min-height: 100vh;'>"
+                + "<div style='max-width: 600px; width: 100%; background: #ffffff; padding: 30px; "
+                + "border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;'>"
+
+                // Header
+                + "<h2 style='color: #2d87f0; margin-bottom: 20px;'>Your OTP Code</h2>"
+                + "<p style='font-size: 16px; color: #555; margin-bottom: 10px;'>"
+                + "Thank you for using <strong>Receipt Generator</strong>!</p>"
+                + "<p style='font-size: 16px; color: #555;'>Please use the OTP below to verify your account:</p>"
+
+                // OTP in large, centered text
+                + "<div style='margin: 20px 0; font-size: 32px; font-weight: bold; color: #f44336;'>"
+                + otp
+                + "</div>"
+
+                // Expiration Note
+                + "<p style='font-size: 14px; color: #888;'>This OTP is valid for <strong>5 minutes</strong>.</p>"
+
+                // Footer
+                + "<p style='font-size: 12px; color: #aaa; margin-top: 20px;'>"
+                + "If you did not request this OTP, please ignore this email.</p>"
+                + "<p style='font-size: 12px; color: #aaa;'>"
+                + "Best regards,<br><strong>XceeDesigns Team</strong></p>"
+
+                + "</div>" // End of content container
+                + "</div>" // End of center alignment
                 + "</body>"
                 + "</html>";
 
@@ -64,7 +83,7 @@ public class OtpService {
 
         mailSender.send(message);
 
-        System.out.println("HTML OTP sent to email: " + email);
+        System.out.println("Professional HTML OTP sent to email: " + email);
     }
 
     public boolean validateOtp(String email, String otp) {

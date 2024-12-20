@@ -1,8 +1,11 @@
 package com.receipt.generator.controllers;
 
+import com.receipt.generator.entities.Response;
 import com.receipt.generator.services.OtpService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,19 +16,19 @@ public class OtpController {
     private OtpService otpService;
 
     @PostMapping("/generate-otp")
-    public String generateOtp(@RequestParam String email) throws MessagingException {
+    public ResponseEntity<?> generateOtp(@RequestParam String email) throws MessagingException {
         String otp = otpService.generateOtp(email);
         otpService.sendOtpEmail(email, otp);
-        return "OTP sent successfully to: " + email;
+        return ResponseEntity.ok(new Response(HttpStatus.ACCEPTED.value(), "OTP sent successfully to: " + email));
     }
 
     @PostMapping("/validate-otp")
-    public String validateOtp(@RequestParam String email, @RequestParam String otp) {
+    public ResponseEntity<?> validateOtp(@RequestParam String email, @RequestParam String otp) {
         boolean isValid = otpService.validateOtp(email, otp);
         if (isValid) {
-            return "OTP is valid. You can now complete registration.";
+            return ResponseEntity.ok(new Response(HttpStatus.ACCEPTED.value(), "OTP verification successfully for: " + email));
         } else {
-            return "Invalid OTP or expired. Please request a new one.";
+            return ResponseEntity.ok(new Response(HttpStatus.REQUEST_TIMEOUT.value(), "Invalid OTP or expired. Please request a new one."));
         }
     }
 }
