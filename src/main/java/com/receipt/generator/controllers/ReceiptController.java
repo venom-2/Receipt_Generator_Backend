@@ -5,7 +5,6 @@ import com.receipt.generator.services.ReceiptService;
 import com.receipt.generator.utilities.JwtUtility;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +20,12 @@ public class ReceiptController {
     JwtUtility jwtUtility;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveReceipt(@RequestBody Receipt receipt) {
+    public ResponseEntity<?> saveReceipt(@RequestBody Receipt receipt) throws Exception {
         return receiptService.saveReceipt(receipt);
     }
 
     @GetMapping("/fetch/{userEmail}")
-    public ResponseEntity<?> fetchReceipt(@PathVariable String userEmail) {
+    public ResponseEntity<?> fetchReceipt(@PathVariable String userEmail) throws Exception {
         return receiptService.fetchReceipt(userEmail);
     }
 
