@@ -6,6 +6,10 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 @Service
 public class PaymentService {
 
@@ -18,16 +22,26 @@ public class PaymentService {
     @Value("${razorpay.currency}")
     private String currency;
 
-    public Order createOrder(double amount) {
+    public Map<String, Object> createOrder(double amount) {
         try {
             RazorpayClient client = new RazorpayClient(keyId, keySecret);
 
             JSONObject orderRequest = new JSONObject();
             orderRequest.put("amount", amount * 100);
             orderRequest.put("currency", currency);
-            orderRequest.put("receipt", "txn_123456");
+            String receiptId = "txn_" + UUID.randomUUID().toString();
+            orderRequest.put("receipt", receiptId);
 
-            return client.orders.create(orderRequest);
+            Order order = client.orders.create(orderRequest);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", order.get("id"));
+            response.put("amount", order.get("amount"));
+            response.put("currency", order.get("currency"));
+            response.put("receipt", order.get("receipt"));
+            response.put("status", order.get("status"));
+
+            return response;
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to create order", e);

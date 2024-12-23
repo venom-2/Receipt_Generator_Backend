@@ -35,10 +35,10 @@ public class PaymentController {
             if (generatedSignature.equals(paymentVerificationRequest.getSignature())) {
                 return ResponseEntity.ok(new Response(HttpStatus.ACCEPTED.value(), "Payment verification successful!"));
             } else {
-                return ResponseEntity.ok(new Response(HttpStatus.BAD_REQUEST.value(), "Payment verification failed!"));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(new Response(HttpStatus.BAD_REQUEST.value(), "Payment verification failed!"));
             }
         } catch (Exception e) {
-            return ResponseEntity.ok(new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal server error - try again later!"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal server error - try again later!"));
         }
     }
 
