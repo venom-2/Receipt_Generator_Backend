@@ -22,6 +22,8 @@ public class UserDAO {
 
     public String saveUser(User user) throws DuplicateResource {
         User existingUser = userRepository.findByEmail(user.getEmail());
+        System.out.println("Email: "+ user.getEmail());
+        System.out.println("Existing User: "+existingUser);
         if(existingUser != null) {
             throw new DuplicateResource("User already exists with this email id!");
         }
