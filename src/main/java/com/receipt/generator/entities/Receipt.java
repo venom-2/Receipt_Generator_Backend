@@ -29,6 +29,13 @@ public class Receipt {
     private String _20kReturn;
     private String _22kReturn;
 
+    private String sgst;
+    private String cgst;
+    private String sgstValue;
+    private String cgstValue;
+    private String totalGst;
+    private String gst;
+
     //Relation with user
     private String user;
 
@@ -41,6 +48,54 @@ public class Receipt {
     private String currentDue;
     private String paidAmount;
     private String totalNetWeight;
+
+    public String getSgst() {
+        return sgst;
+    }
+
+    public void setSgst(String sgst) {
+        this.sgst = sgst;
+    }
+
+    public String getCgst() {
+        return cgst;
+    }
+
+    public void setCgst(String cgst) {
+        this.cgst = cgst;
+    }
+
+    public String getSgstValue() {
+        return sgstValue;
+    }
+
+    public void setSgstValue(String sgstValue) {
+        this.sgstValue = sgstValue;
+    }
+
+    public String getCgstValue() {
+        return cgstValue;
+    }
+
+    public void setCgstValue(String cgstValue) {
+        this.cgstValue = cgstValue;
+    }
+
+    public String getTotalGst() {
+        return totalGst;
+    }
+
+    public void setTotalGst(String totalGst) {
+        this.totalGst = totalGst;
+    }
+
+    public String getGst() {
+        return gst;
+    }
+
+    public void setGst(String gst) {
+        this.gst = gst;
+    }
 
     public String getBusinessName() {
         return businessName;
@@ -210,7 +265,7 @@ public class Receipt {
         this.totalNetWeight = totalNetWeight;
     }
 
-    public Receipt(String businessName, String address, String phone, String documentTitle, String customerName, String customerAddress, String customerPhone, String billNumber, String date, String _24kRate, String silverBhav, String _18kReturn, String _20kReturn, String _22kReturn, String user, List<JewellerItems> items, String closingBalance, String previousDue, String currentDue, String paidAmount, String totalNetWeight) {
+    public Receipt(String businessName, String address, String phone, String documentTitle, String customerName, String customerAddress, String customerPhone, String billNumber, String date, String _24kRate, String silverBhav, String _18kReturn, String _20kReturn, String _22kReturn, String sgst, String cgst, String sgstValue, String cgstValue, String totalGst, String gst, String user, List<JewellerItems> items, String closingBalance, String previousDue, String currentDue, String paidAmount, String totalNetWeight) {
         this.businessName = businessName;
         this.address = address;
         this.phone = phone;
@@ -225,6 +280,12 @@ public class Receipt {
         this._18kReturn = _18kReturn;
         this._20kReturn = _20kReturn;
         this._22kReturn = _22kReturn;
+        this.sgst = sgst;
+        this.cgst = cgst;
+        this.sgstValue = sgstValue;
+        this.cgstValue = cgstValue;
+        this.totalGst = totalGst;
+        this.gst = gst;
         this.user = user;
         this.items = items;
         this.closingBalance = closingBalance;
